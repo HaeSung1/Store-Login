@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--certain names have been changed for client-->
+    <meta charset="UTF-8" />
+    <title>Salesperson Login</title>
+    <style>
+      body {
+        font-family: Luminari, Gabriola, cursive;
+        font-size: 18px;
+        background-image: url("bookstore image");
+      }
+      section {
+        background-color: white;
+        width: 50%;
+        height: auto;
+        padding: 10px;
+        border: Thick Solid Green;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      p {
+        font-weight: bold;
+      }
+      #FirstName,
+      #LastName,
+      #Password,
+      #NumberID,
+      #Phone,
+      #Email {
+        font-size: 18px;
+        height: 25px;
+        width: 97%;
+      }
+      #Transaction {
+        font-size: 18px;
+        height: 25px;
+        width: 50%;
+      }
+      #submit,
+      #reset {
+        font-size: 18px;
+        height: 40px;
+        width: 80px;
+      }
+      #Req {
+        color: green;
+      }
+      #buttons {
+        text-align: right;
+      }
+    </style>
+    <script>
+        fname = document.getElementById("FirstName");
+        firstPatt = /[A-Za-z]+/;
+        lname = document.getElementById("LastName");
+        lastPatt = /[A-Za-z]+/;
+        password = document.getElementById("password");
+        passPatt = /(?:\w)+(?:\W)+(?:\d)+/;
+        numId = document.getElementById("NumberID");
+        numPatt = /[0-9]{8,8}/;
+        phone = document.getElementById("Phone");
+        phonePatt = /[0-9]{3,3}\S[0-9]{3,3}\S[0-9]{4,4}/;
+        email = document.getElementById("Email");
+        emailPatt = /^[\w]+@\w{2,5}.\w+$/;
+        emailCheck = document.getElementById("EmailConfirm");
+
+      function Validate(){
+        if(!firstPatt.test(fname)){
+          alert("No numbers or special characters in a name!");
+          return false;
+        }
+        if(!lastPatt.test(lname)){
+          alert("No numbers or special characters in a name!");
+          return false;
+        }
+        if(!passPatt.test(password)){
+          alert("Password must be maximum 10 characters long and contain at least one capital letter,one number and one special character!");
+          return false;
+        }
+        if(!numPatt.test(numId)){
+          alert("Only numbers in a Number ID!");
+          return false;
+        }
+        if(!numPatt.test(numId)){
+          alert("Only numbers in a Number ID!");
+          return false;
+        }
+        if(!phonePatt.test(phone)){
+          alert("Phone numbers should follow this example ###-###-####");
+          return false;
+        }
+        if(emailCheck.checked){
+          if(!emailPatt.test(email)){
+            alert("Email must follow the following guidelines: abcdefgh@abcdef.abc");
+            return false;
+          }
+        }
+        return true;
+      }
+      function verify(){
+        const firstn = ["Peter", "James", "Gwen", "Kitty"];
+        const lastn = ["Parker", "Logan", "Stacy", "Pryde"];
+        const pass = ["AmazingF#15", "Incredible#180", "Amazing$31", "Uncanny#129"]
+        const trans = document.getElementById("Transaction");
+        if(Validate() == true){
+          for(const i = 0; i < 5; i++){
+            if(firstn[i] == fname && lastn[i] == lname && pass[i] == password){
+              alert("Welcome " + fname + " " + lname + " we will process " + trans);
+              return true;
+            }
+            else{
+              alert("User not found!");
+              return false;
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <section id="Login">
+      <h1 id="TSKB">
+        <strong>The Story Keeper Bookstore</strong>
+      </h1>
+
+      <form method="GET" action="http://example.org/">
+        <p id="first">
+          <label for="FirstName">Book Seller's First Name:</label>
+          <input
+            type="text"
+            id="FirstName"
+            name="FirstName"
+            placeholder="First Name"
+            required
+          />
+          <label id="Req" for="FirstName">Required</label>
+        </p>
+
+        <p id="second">
+          <label for="LastName">Book Seller's Last Name:</label>
+          <input
+            type="text"
+            id="LastName"
+            name="LastName"
+            placeholder="Last Name"
+            required
+          />
+          <label id="Req" for="LastName">Required</label>
+        </p>
+
+        <p id="third">
+          <label for="Password">Book Seller's Password:</label>
+          <input
+            type="password"
+            id="Password"
+            name="Password"
+            placeholder="*****"
+            required
+          />
+          <label id="Req" for="Password">Required</label>
+        </p>
+
+        <p id="fourth">
+          <label for="NumberID">Bookseller's ID #:</label>
+          <input
+            type="text"
+            id="NumberID"
+            name="NumberID"
+            placeholder="12345678"
+            required
+          />
+          <label id="Req" for="NumberID">Required</label>
+        </p>
+
+        <p id="fifth">
+          <label for="Phone">Bookseller's Phone #:</label>
+          <input
+            type="tel"
+            id="Phone"
+            name="Phone"
+            placeholder="###-###-####"
+            required
+          />
+          <label id="Req" for="Phone">Required</label>
+        </p>
+
+        <p>
+          <input
+            type="checkbox"
+            name="EmailConfirm"
+            id="EmailConfirm"
+            onclick="Validate()"
+          />
+          <label for="EmailConfirm">
+            Check the box to request a Email Confirmation
+          </label>
+        </p>
+
+        <p id="sixth">
+          <label for="Email">Bookseller's Email:</label>
+          <input
+            type="email"
+            id="Email"
+            name="Email"
+            placeholder="name@domain.com"
+          />
+          <label id="Req" for="Email">Required</label>
+        </p>
+
+        <p id="Transac">
+          <label for="Transaction"> Select a Transaction: </label>
+          <select id="Transaction" name="Transaction">
+            <option value="Account">Search Book Seller's Accounts</option>
+            <option value="Purchase">Customer's Book Purchases</option>
+            <option value="Return">Customer's Book Return</option>
+            <option value="update">Update a Customer's Book Order</option>
+            <option value="Cancel">Cancel a Customer's Book Order</option>
+            <option value="Search">Search for a Book</option>
+            <option value="Create">Create a Customer Account</option>
+          </select>
+        </p>
+
+        <p id="buttons">
+          <input id="submit" type="submit" value="Submit" onclick="verify()" />
+          <input id="reset" type="reset" value="Reset" />
+        </p>
+      </form>
+    </section>
+  </body>
+</html>
